@@ -10,8 +10,6 @@ RUN mkdir -p /run/udev; mkdir -p /run/dbus; mkdir -p /run/systemd/system
 
 RUN cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 
-RUN sed -e 's/^root.*/root\tALL=(ALL)\tALL\njn\tALL=(ALL)\tALL/g' /etc/sudoers > /etc/sudoers.new ; mv /etc/sudoers.new /etc/sudoers
-
 RUN cat /etc/bashrc | sed 's/\(.*PROMPT_COMMAND=\).*033K.*/\1'"'"'PRINTF "\\033];%S@%S:%S\\033\\\\" "${USER}" "${HOSTNAME%%.*}" "${PWD\/#$HOME\/~}"'"'"'/g' > /etc/tmp; mv /etc/tmp /etc/bashrc
 
  
