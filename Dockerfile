@@ -1,4 +1,4 @@
-FROM chinch/fedora:rancher
+FROM chinch/fc24
 
 RUN dnf -y update && dnf -y install i3 i3status dmenu i3lock conky feh glx-utils sudo fish xcalib socat pavucontrol libXxf86vm libXrandr firefox gnome-terminal passwd pulseaudio docker docker-compose atomic pulseaudio-utils && dnf -y clean all
 
@@ -9,8 +9,6 @@ RUN rm -rf /etc/systemd/system/systemd-remount-fs.service; rm -rf /etc/systemd/s
 RUN mkdir -p /run/udev; mkdir -p /run/dbus; mkdir -p /run/systemd/system
 
 RUN cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-
-#RUN adduser jn ; usermod -aG video jn ; usermod -aG audio jn ; groupadd sudo ; usermod -aG sudo jn ; groupadd docker ; usermod -aG docker jn
 
 RUN sed -e 's/^root.*/root\tALL=(ALL)\tALL\njn\tALL=(ALL)\tALL/g' /etc/sudoers > /etc/sudoers.new ; mv /etc/sudoers.new /etc/sudoers
 
