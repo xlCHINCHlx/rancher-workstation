@@ -18,11 +18,10 @@ RUN cat /etc/bashrc | sed 's/\(.*PROMPT_COMMAND=\).*033K.*/\1'"'"'PRINTF "\\033]
 
 RUN  echo  '12345678900987654321234567890987'   > /etc/machine-id
 
-ENV DISPLAY=":0"
+ADD gui /usr/bin
 
-ADD  cgroupfs-mount /usr/bin/
+RUN  chmod +x /usr/bin/gui
 
-RUN chmod +x  /usr/bin/cgroupfs-mount
+ENTRYPOINT /usr/bin/gui
 
-CMD  cgroupfs-mount
        
