@@ -2,7 +2,7 @@ FROM chinch/fc24
 
 WORKDIR  /root/Downloads
 
-RUN dnf -y update && dnf -y install Xorg gnome-shell xorg-x11-drivers mesa-dri-drivers glx-utils sudo fish xcalib socat pavucontrol libXxf86vm libXrandr firefox gnome-terminal passwd pulseaudio docker docker-compose atomic  wget  pulseaudio-utils && dnf -y clean all
+RUN dnf -y update && dnf -y install Xorg gnome-shell xorg-x11-drivers mesa-dri-drivers glx-utils sudo fish xcalib socat pavucontrol libXxf86vm libXrandr firefox gnome-terminal passwd pulseaudio docker docker-compose atomic  wget  lxterminal  pulseaudio-utils && dnf -y clean all
 
 RUN (cd/lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] ||rm -f$i; done); rm -f /lib/systemd/system/multi-user.target.wants/* ; rm -f /etc/systemd/system/*.wants/*; rm -f /lib/systemd/system/local-fs.target.wants/*;rm -f /lib/systemd/system/sockets.target.wants/*udev*; rm -f /lib/systemd/system/sockets.target.wants/*initctl*; rm -f /lib/systemd/system/basic.target.wants/*; rm -f /lib/systemd/system/anaconda.target.wants/*;
 
@@ -18,13 +18,11 @@ RUN sed -e 's/^root.*/root\tALL=(ALL)\tALL\nrancher\tALL=(ALL)\tALL/g' /etc/sudo
 
 RUN cat /etc/bashrc | sed 's/\(.*PROMPT_COMMAND=\).*033K.*/\1'"'"'PRINTF "\\033];%S@%S:%S\\033\\\\" "${USER}" "${HOSTNAME%%.*}" "${PWD\/#$HOME\/~}"'"'"'/g' > /etc/tmp; mv /etc/tmp /etc/bashrc
 
-RUN  echo  '12345678900987654321234567890987'   > /etc/machine-id ; wget --no-check-certificate https://reterwebber.files.wordpress.com/2014/09/docker-wallpaper-black.jpg
+RUN  echo  '12345678900987654321234567890987'   > /etc/machine-id 
 
 ADD gui /usr/bin
 
-ADD 01-background /etc/dconf/db/local.d
-
-RUN  chmod +x /usr/bin/gui ; dconf update
+RUN  chmod +x /usr/bin/gui 
 
 ENTRYPOINT /usr/bin/gui
 
