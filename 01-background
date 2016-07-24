@@ -1,0 +1,9 @@
+[org/gnome/desktop/background]
+
+picture-uri='file:/root/Downloads/docker-wallpaper-black.jpg'
+
+picture-options='stretched'
+
+primary-color='000000'
+
+secondary-color='FFFFFF'
